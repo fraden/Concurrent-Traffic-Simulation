@@ -83,7 +83,7 @@ void TrafficLight::cycleThroughPhases()
         if(timeInCycle.count() >= cycleDuration){
             
             _currentPhase != _currentPhase;
-            //todo: send messages
+            _trafficMessages.send(std::move(_currentPhase));
             cycleDuration = uni(rng);
             startOfCycle = system_clock::now();
         }
