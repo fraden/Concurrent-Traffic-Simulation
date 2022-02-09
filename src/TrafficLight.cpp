@@ -97,8 +97,8 @@ void TrafficLight::cycleThroughPhases()
 
         if(timeInCycle.count() >= cycleDuration){
             
-            _currentPhase = _currentPhase == green ? red : green;;
-            _trafficMessages.send(std::move(_currentPhase));
+            _currentPhase = _currentPhase == green ? red : green;
+            _trafficMessages.send(std::move(green));
             cycleDuration = uni(rng);
             startOfCycle = system_clock::now();
         }
