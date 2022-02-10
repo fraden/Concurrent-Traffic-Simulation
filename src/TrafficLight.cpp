@@ -92,13 +92,12 @@ void TrafficLight::cycleThroughPhases()
     while(true){
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
+        double timeInCycle = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - startOfCycle).count();
 
-        duration<double> timeInCycle = duration_cast<duration<double, std::milli>>(system_clock::now() - startOfCycle);
-
-        if(timeInCycle.count() >= cycleDuration){
+        if(timeInCycle >= cycleDuration){
             
             _currentPhase = _currentPhase == green ? red : green;
-            _trafficMessages.send(std::move(green));
+            _trafficMessages.send(std::move(_currentPhase));
             cycleDuration = uni(rng);
             startOfCycle = system_clock::now();
         }
